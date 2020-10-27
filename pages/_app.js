@@ -9,70 +9,69 @@ function MyApp({ Component, pageProps }) {
         className="relative flex flex-col flex-1 w-full overflow-hidden bg-white shadow xs:max-w-sm"
         style={{ maxHeight: 812 }}
       >
-        <header className="flex items-center px-4 py-3 border-b">
+        <header
+          className={`flex items-center px-4 bg-white h-13 border-b ${
+            Component.headerBorder ? "border-gray-300" : "border-transparent"
+          }`}
+        >
           <img
             className="rounded-full w-7 h-7"
-            src="http://twivatar.glitch.me/samselikoff"
+            src="http://twivatar.glitch.me/anikijiang"
+            alt=""
           />
-          <p className="ml-6 text-lg font-extrabold">{Component.headerTitle}</p>
+          <p className="pl-px text-lg font-extrabold ml-7">
+            {Component.headerTitle}
+          </p>
         </header>
 
         <main className="flex-1 overflow-scroll">
           <Component {...pageProps} />
         </main>
 
-        <footer className="flex border-t border-gray-200">
-          <Link
+        <footer className="flex items-center justify-between bg-white border-t border-gray-200">
+          <FooterLink
             href="/"
-            className="flex items-center justify-center w-1/4 py-3"
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <HomeIcon className="p-px text-blue-500 w-7 h-7" />
-              ) : (
-                <HomeIconEmpty className="p-px text-gray-500 w-7 h-7" />
-              )
-            }
-          </Link>
-          <Link
+            activeIcon={<HomeIcon className="w-7 h-7" />}
+            inactiveIcon={<HomeIconEmpty className="w-7 h-7" />}
+          />
+
+          <FooterLink
             href="/explore"
-            className="flex items-center justify-center w-1/4 py-3 text-gray-500"
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <SearchIcon className="p-px text-blue-500 w-7 h-7" />
-              ) : (
-                <SearchIconEmpty className="p-px text-gray-500 w-7 h-7" />
-              )
-            }
-          </Link>
-          <Link
+            activeIcon={<SearchIcon className="w-7 h-7" />}
+            inactiveIcon={<SearchIconEmpty className="w-7 h-7" />}
+          />
+
+          <FooterLink
             href="/notifications"
-            className="flex items-center justify-center w-1/4 py-3 text-gray-500"
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <BellIcon className="p-px text-blue-500 w-7 h-7" />
-              ) : (
-                <BellIconEmpty className="p-px text-gray-500 w-7 h-7" />
-              )
-            }
-          </Link>
-          <Link
+            activeIcon={<BellIcon className="w-7 h-7" />}
+            inactiveIcon={<BellIconEmpty className="w-7 h-7" />}
+          />
+
+          <FooterLink
             href="/messages"
-            className="flex items-center justify-center w-1/4 py-3 text-gray-500"
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <MailboxIcon className="p-px text-blue-500 w-7 h-7" />
-              ) : (
-                <MailboxIconEmpty className="p-px text-gray-500 w-7 h-7" />
-              )
-            }
-          </Link>
+            activeIcon={<MailboxIcon className="w-7 h-7" />}
+            inactiveIcon={<MailboxIconEmpty className="w-7 h-7" />}
+          />
         </footer>
       </div>
     </div>
+  );
+}
+
+function FooterLink({ href, children, activeIcon, inactiveIcon }) {
+  return (
+    <Link
+      href={href}
+      className="flex justify-center w-1/4 py-3"
+      activeClassName="text-blue-500"
+      inactiveClassName="text-gray-500"
+    >
+      {({ isActive }) => (
+        <span className="flex justify-center w-1/4">
+          {isActive ? activeIcon : inactiveIcon}
+        </span>
+      )}
+    </Link>
   );
 }
 
