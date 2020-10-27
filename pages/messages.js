@@ -1,7 +1,8 @@
 function Messages() {
-  return <p className="p-4">Messages</p>;
+  return null;
 }
 
 Messages.headerTitle = "Messages";
+Messages.headerBorder = true;
 
 export default Messages;
