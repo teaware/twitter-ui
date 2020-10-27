@@ -4,7 +4,7 @@ import faker, { image, name, internet, lorem } from "faker";
 
 faker.seed(123);
 
-let startingDate = parseISO("2020-01-14");
+let startingDate = parseISO("2020-10-14");
 let server = createServer({
   timing: 1000,
   models: {
@@ -34,9 +34,9 @@ let server = createServer({
       },
 
       fromSam: trait({
-        name: "Sam Selikoff",
-        username: "samselikoff",
-        avatarUrl: "http://twivatar.glitch.me/samselikoff",
+        name: "Aniki Jiang",
+        username: "anikijiang",
+        avatarUrl: "https://twivatar.glitch.me/anikijiang",
       }),
     }),
   },
@@ -54,10 +54,9 @@ let server = createServer({
     server.create("tweet", "fromSam", {
       text: "I still don't understand useEffect",
     });
-    server.createList("tweet", 50);
   },
 });
 
-// setInterval(() => {
-//   server.create("tweet");
-// }, 5000);
+setInterval(() => {
+  server.create("tweet");
+}, 3000);
